@@ -1,7 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import todoRoute from "./routes/todoRoutes";
-
+import todoRoute from "./routes/todoRoutes.js";
 
 const app = express();
 
@@ -9,7 +8,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api", todoRoute);
-
 
 mongoose
   .connect(
@@ -22,5 +20,5 @@ mongoose
     });
   })
   .catch((error) => {
-    console.log("connection failed",error);
+    console.log("connection failed", error);
   });
