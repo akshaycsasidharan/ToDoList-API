@@ -5,21 +5,23 @@ import {
   createTodo,
   updateTodo,
   deleteTodo,
-  // filterTodos
+  filterTodos,
 } from "../controllers/todoControllers.js";
+
+import { verifyToken } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-router.get("/todos", gettodos);
+router.get("/todos/filter", verifyToken, filterTodos);
 
-router.get("/todos/:id", getTodoById);
+router.get("/todos", verifyToken, gettodos);
 
-router.post("/todos", createTodo);
+router.get("/todos/:id", verifyToken, getTodoById);
 
-router.put("/todos/:id", updateTodo);
+router.post("/todos", verifyToken, createTodo);
 
-router.delete("/todos/:id", deleteTodo);
+router.put("/todos/:id", verifyToken, updateTodo);
 
-// router.get('/todos/filter', filterTodos);
+router.delete("/todos/:id", verifyToken, deleteTodo);
 
 export default router;

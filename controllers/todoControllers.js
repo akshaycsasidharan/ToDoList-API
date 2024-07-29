@@ -65,3 +65,13 @@ export const deleteTodo = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const filterTodos = async (req, res) => {
+    try {
+      const status = req.query.status;
+      const todos = await TODOLIST.find({ status });
+      res.status(200).json(todos);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
